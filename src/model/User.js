@@ -15,6 +15,11 @@ const UserSchema = mongoose.Schema({
         required: true,
     },
 
+    image_url: {
+        type: String,
+        default: "",
+    },
+
     songs: [
         {
             type: mongoose.Schema.Types.ObjectId,

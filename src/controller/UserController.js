@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const multer = require("multer");
 
 const userController = {
     
@@ -28,6 +29,7 @@ const userController = {
             full_name: req.body.full_name,
             gender: req.body.gender,
             address: req.body.address,
+            image_url: req.body.image_name,
         });
 
         try {
@@ -60,6 +62,9 @@ const userController = {
         } catch (error) {
             res.status(400).json({message: "No Data Found!"})
         }
+    },
+    uploadImage:  (req, res) => {
+
     }
 }
 
