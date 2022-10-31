@@ -1,6 +1,7 @@
 const express = require("express");
 const userController = require("../controller/UserController");
 const multer = require("multer");
+const AuthMiddleware = require("../middleware/auth");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -16,14 +17,13 @@ const uploadImage = multer({ storage });
 
 const router = express.Router();
 
-router.get("/", userController.getAllUsers);
+router.get("/", AuthMiddleware ,userController.getAllUsers);
+
+
 router.get("/:id", userController.getSingleUser);
-
 router.post("/", uploadImage.single("file"), userController.addNewUser);
-
 router.patch("/:id", userController.editUser);
 router.delete("/:id", userController.deleteUser);
-
 router.post("/uploadImage", uploadImage.single("file"), (req, res) => {
     res.send(req.body);
 });
